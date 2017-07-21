@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.common.dao.OwnerParkingSpaceRelModelMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.common.model.OwnerParkingSpaceRelModel" >
+    <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+    <result column="parking_space_id" property="parkingSpaceId" jdbcType="BIGINT" />
+    <result column="start_date" property="startDate" jdbcType="DATE" />
+    <result column="end_date" property="endDate" jdbcType="DATE" />
+    <result column="is_own" property="isOwn" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ld.common.model.OwnerParkingSpaceRelModel" >
+    insert into owner_parking_space_rel (owner_id, parking_space_id, start_date, 
+      end_date, is_own, status, 
+      create_time, update_time, update_user
+      )
+    values (#{ownerId,jdbcType=BIGINT}, #{parkingSpaceId,jdbcType=BIGINT}, #{startDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{isOwn,jdbcType=BIGINT}, #{status,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.common.model.OwnerParkingSpaceRelModel" >
+    insert into owner_parking_space_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="parkingSpaceId != null" >
+        parking_space_id,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="isOwn != null" >
+        is_own,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="parkingSpaceId != null" >
+        #{parkingSpaceId,jdbcType=BIGINT},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="isOwn != null" >
+        #{isOwn,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

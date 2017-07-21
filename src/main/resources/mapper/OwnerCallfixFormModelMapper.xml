@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.common.dao.OwnerCallfixFormModelMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.common.model.OwnerCallfixFormModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+    <result column="community_id" property="communityId" jdbcType="BIGINT" />
+    <result column="organization" property="organization" jdbcType="VARCHAR" />
+    <result column="object" property="object" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="callfix_desc" property="callfixDesc" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIGINT" />
+    <result column="responsible_person" property="responsiblePerson" jdbcType="VARCHAR" />
+    <result column="responsible_person_mobile" property="responsiblePersonMobile" jdbcType="VARCHAR" />
+    <result column="process_user" property="processUser" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, owner_id, community_id, organization, object, name, mobile, callfix_desc, status, 
+    responsible_person, responsible_person_mobile, process_user, remark, create_time, 
+    update_time
+  </sql>
+  
+  <sql id="limit_sql">
+  	   <if test="page_sql != null and page_sql != ''">
+      	${page_sql}
+      </if>
+  </sql>
+  <sql id="where_all">
+  	<where>
+  	<if test="findContent != null" >
+        and (
+        community_id = #{findContent,jdbcType=BIGINT}
+        )
+      </if>
+      </where>
+  </sql>
+  <!-- 普通的分页查询 -->
+  <select id="findAll" resultMap="BaseResultMap" >
+  	 select 
+    <include refid="Base_Column_List" />
+    from owner_callfix_form  
+    <include refid="where_all"/>
+      order by id desc 
+    <include refid="limit_sql" />
+   
+  </select>
+  <select id="findCount" resultMap="BaseResultMap" >
+ 	 select count(id) from  owner_callfix_form
+  	<include refid="where_all" />
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from owner_callfix_form
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from owner_callfix_form
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ld.common.model.OwnerCallfixFormModel" >
+    insert into owner_callfix_form (id, owner_id, community_id, 
+      organization, object, name, 
+      mobile, callfix_desc, status, 
+      responsible_person, responsible_person_mobile, 
+      process_user, remark, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{ownerId,jdbcType=BIGINT}, #{communityId,jdbcType=BIGINT}, 
+      #{organization,jdbcType=VARCHAR}, #{object,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{callfixDesc,jdbcType=VARCHAR}, #{status,jdbcType=BIGINT}, 
+      #{responsiblePerson,jdbcType=VARCHAR}, #{responsiblePersonMobile,jdbcType=VARCHAR}, 
+      #{processUser,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.common.model.OwnerCallfixFormModel" >
+    insert into owner_callfix_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="communityId != null" >
+        community_id,
+      </if>
+      <if test="organization != null" >
+        organization,
+      </if>
+      <if test="object != null" >
+        object,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="callfixDesc != null" >
+        callfix_desc,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="responsiblePerson != null" >
+        responsible_person,
+      </if>
+      <if test="responsiblePersonMobile != null" >
+        responsible_person_mobile,
+      </if>
+      <if test="processUser != null" >
+        process_user,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="communityId != null" >
+        #{communityId,jdbcType=BIGINT},
+      </if>
+      <if test="organization != null" >
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="object != null" >
+        #{object,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="callfixDesc != null" >
+        #{callfixDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIGINT},
+      </if>
+      <if test="responsiblePerson != null" >
+        #{responsiblePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="responsiblePersonMobile != null" >
+        #{responsiblePersonMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="processUser != null" >
+        #{processUser,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.common.model.OwnerCallfixFormModel" >
+    update owner_callfix_form
+    <set >
+      <if test="ownerId != null" >
+        owner_id = #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="communityId != null" >
+        community_id = #{communityId,jdbcType=BIGINT},
+      </if>
+      <if test="organization != null" >
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="object != null" >
+        object = #{object,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="callfixDesc != null" >
+        callfix_desc = #{callfixDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIGINT},
+      </if>
+      <if test="responsiblePerson != null" >
+        responsible_person = #{responsiblePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="responsiblePersonMobile != null" >
+        responsible_person_mobile = #{responsiblePersonMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="processUser != null" >
+        process_user = #{processUser,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.common.model.OwnerCallfixFormModel" >
+    update owner_callfix_form
+    set owner_id = #{ownerId,jdbcType=BIGINT},
+      community_id = #{communityId,jdbcType=BIGINT},
+      organization = #{organization,jdbcType=VARCHAR},
+      object = #{object,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      callfix_desc = #{callfixDesc,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIGINT},
+      responsible_person = #{responsiblePerson,jdbcType=VARCHAR},
+      responsible_person_mobile = #{responsiblePersonMobile,jdbcType=VARCHAR},
+      process_user = #{processUser,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

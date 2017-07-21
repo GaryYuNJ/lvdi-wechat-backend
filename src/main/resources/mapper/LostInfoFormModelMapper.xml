@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.common.dao.LostInfoFormModelMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.common.model.LostInfoFormModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="community_id" property="communityId" jdbcType="BIGINT" />
+    <result column="object_name" property="objectName" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="pickup_location" property="pickupLocation" jdbcType="VARCHAR" />
+    <result column="pickup_user" property="pickupUser" jdbcType="BIGINT" />
+    <result column="pickup_user_name" property="pickupUserName" jdbcType="VARCHAR" />
+    <result column="object_desc" property="objectDesc" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="claim_location" property="claimLocation" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIGINT" />
+    <result column="lost_user_name" property="lostUserName" jdbcType="VARCHAR" />
+    <result column="lost_user_mobile" property="lostUserMobile" jdbcType="VARCHAR" />
+    <result column="lost_user_id" property="lostUserId" jdbcType="VARCHAR" />
+    <result column="process_user" property="processUser" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, community_id, object_name, mobile, pickup_location, pickup_user, pickup_user_name, 
+    object_desc, time, claim_location, status, lost_user_name, lost_user_mobile, lost_user_id, 
+    process_user, remark, create_time, update_time
+  </sql>
+  
+  
+
+<sql id="limit_sql">
+  	   <if test="page_sql != null and page_sql != ''">
+      	${page_sql}
+      </if>
+  </sql>
+  <sql id="where_all">
+  	<where>
+  	<if test="findContent != null" >
+        and (
+        community_id = #{findContent,jdbcType=BIGINT}
+        )
+      </if>
+      </where>
+  </sql>
+  <!-- 普通的分页查询 -->
+  <select id="findAll" resultMap="BaseResultMap" >
+  	 select 
+    <include refid="Base_Column_List" />
+    from lost_info_form  
+    <include refid="where_all"/>
+      order by id desc 
+    <include refid="limit_sql" />
+   
+  </select>
+  
+  <select id="findCount" resultMap="BaseResultMap" >
+ 	 select count(id) from  lost_info_form
+  	<include refid="where_all" />
+  </select>
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lost_info_form
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lost_info_form
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ld.common.model.LostInfoFormModel" >
+    insert into lost_info_form (id, community_id, object_name, 
+      mobile, pickup_location, pickup_user, 
+      pickup_user_name, object_desc, time, 
+      claim_location, status, lost_user_name, 
+      lost_user_mobile, lost_user_id, process_user, 
+      remark, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{communityId,jdbcType=BIGINT}, #{objectName,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{pickupLocation,jdbcType=VARCHAR}, #{pickupUser,jdbcType=BIGINT}, 
+      #{pickupUserName,jdbcType=VARCHAR}, #{objectDesc,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{claimLocation,jdbcType=VARCHAR}, #{status,jdbcType=BIGINT}, #{lostUserName,jdbcType=VARCHAR}, 
+      #{lostUserMobile,jdbcType=VARCHAR}, #{lostUserId,jdbcType=VARCHAR}, #{processUser,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.common.model.LostInfoFormModel" >
+    insert into lost_info_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="communityId != null" >
+        community_id,
+      </if>
+      <if test="objectName != null" >
+        object_name,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="pickupLocation != null" >
+        pickup_location,
+      </if>
+      <if test="pickupUser != null" >
+        pickup_user,
+      </if>
+      <if test="pickupUserName != null" >
+        pickup_user_name,
+      </if>
+      <if test="objectDesc != null" >
+        object_desc,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="claimLocation != null" >
+        claim_location,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lostUserName != null" >
+        lost_user_name,
+      </if>
+      <if test="lostUserMobile != null" >
+        lost_user_mobile,
+      </if>
+      <if test="lostUserId != null" >
+        lost_user_id,
+      </if>
+      <if test="processUser != null" >
+        process_user,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="communityId != null" >
+        #{communityId,jdbcType=BIGINT},
+      </if>
+      <if test="objectName != null" >
+        #{objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupLocation != null" >
+        #{pickupLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupUser != null" >
+        #{pickupUser,jdbcType=BIGINT},
+      </if>
+      <if test="pickupUserName != null" >
+        #{pickupUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="objectDesc != null" >
+        #{objectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="claimLocation != null" >
+        #{claimLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIGINT},
+      </if>
+      <if test="lostUserName != null" >
+        #{lostUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lostUserMobile != null" >
+        #{lostUserMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lostUserId != null" >
+        #{lostUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="processUser != null" >
+        #{processUser,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.common.model.LostInfoFormModel" >
+    update lost_info_form
+    <set >
+      <if test="communityId != null" >
+        community_id = #{communityId,jdbcType=BIGINT},
+      </if>
+      <if test="objectName != null" >
+        object_name = #{objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupLocation != null" >
+        pickup_location = #{pickupLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupUser != null" >
+        pickup_user = #{pickupUser,jdbcType=BIGINT},
+      </if>
+      <if test="pickupUserName != null" >
+        pickup_user_name = #{pickupUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="objectDesc != null" >
+        object_desc = #{objectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="claimLocation != null" >
+        claim_location = #{claimLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIGINT},
+      </if>
+      <if test="lostUserName != null" >
+        lost_user_name = #{lostUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lostUserMobile != null" >
+        lost_user_mobile = #{lostUserMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lostUserId != null" >
+        lost_user_id = #{lostUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="processUser != null" >
+        process_user = #{processUser,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.common.model.LostInfoFormModel" >
+    update lost_info_form
+    set community_id = #{communityId,jdbcType=BIGINT},
+      object_name = #{objectName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      pickup_location = #{pickupLocation,jdbcType=VARCHAR},
+      pickup_user = #{pickupUser,jdbcType=BIGINT},
+      pickup_user_name = #{pickupUserName,jdbcType=VARCHAR},
+      object_desc = #{objectDesc,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      claim_location = #{claimLocation,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIGINT},
+      lost_user_name = #{lostUserName,jdbcType=VARCHAR},
+      lost_user_mobile = #{lostUserMobile,jdbcType=VARCHAR},
+      lost_user_id = #{lostUserId,jdbcType=VARCHAR},
+      process_user = #{processUser,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.common.dao.ParkingSpaceModelMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.common.model.ParkingSpaceModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="community_id" property="communityId" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="bigint1" property="bigint1" jdbcType="BIGINT" />
+    <result column="bigint2" property="bigint2" jdbcType="BIGINT" />
+    <result column="varchar1" property="varchar1" jdbcType="VARCHAR" />
+    <result column="varchar2" property="varchar2" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, community_id, code, name, size, remark, bigint1, bigint2, varchar1, varchar2, 
+    create_time, update_time, update_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from parking_space
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from parking_space
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ld.common.model.ParkingSpaceModel" >
+    insert into parking_space (id, community_id, code, 
+      name, size, remark, 
+      bigint1, bigint2, varchar1, 
+      varchar2, create_time, update_time, 
+      update_user)
+    values (#{id,jdbcType=BIGINT}, #{communityId,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{size,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{bigint1,jdbcType=BIGINT}, #{bigint2,jdbcType=BIGINT}, #{varchar1,jdbcType=VARCHAR}, 
+      #{varchar2,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.common.model.ParkingSpaceModel" >
+    insert into parking_space
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="communityId != null" >
+        community_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="bigint1 != null" >
+        bigint1,
+      </if>
+      <if test="bigint2 != null" >
+        bigint2,
+      </if>
+      <if test="varchar1 != null" >
+        varchar1,
+      </if>
+      <if test="varchar2 != null" >
+        varchar2,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="communityId != null" >
+        #{communityId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="bigint1 != null" >
+        #{bigint1,jdbcType=BIGINT},
+      </if>
+      <if test="bigint2 != null" >
+        #{bigint2,jdbcType=BIGINT},
+      </if>
+      <if test="varchar1 != null" >
+        #{varchar1,jdbcType=VARCHAR},
+      </if>
+      <if test="varchar2 != null" >
+        #{varchar2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.common.model.ParkingSpaceModel" >
+    update parking_space
+    <set >
+      <if test="communityId != null" >
+        community_id = #{communityId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="bigint1 != null" >
+        bigint1 = #{bigint1,jdbcType=BIGINT},
+      </if>
+      <if test="bigint2 != null" >
+        bigint2 = #{bigint2,jdbcType=BIGINT},
+      </if>
+      <if test="varchar1 != null" >
+        varchar1 = #{varchar1,jdbcType=VARCHAR},
+      </if>
+      <if test="varchar2 != null" >
+        varchar2 = #{varchar2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.common.model.ParkingSpaceModel" >
+    update parking_space
+    set community_id = #{communityId,jdbcType=BIGINT},
+      code = #{code,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      size = #{size,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      bigint1 = #{bigint1,jdbcType=BIGINT},
+      bigint2 = #{bigint2,jdbcType=BIGINT},
+      varchar1 = #{varchar1,jdbcType=VARCHAR},
+      varchar2 = #{varchar2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
